@@ -1,0 +1,267 @@
+@import "../omarchy/current/theme/waybar.css";
+
+* {
+  /* background-color: @background; */
+  /* color: @foreground; */
+
+  border: none;
+  padding: 0px;
+  min-height: 0;
+  font-family: 'JetBrainsMono Nerd Font';
+  font-weight: normal;
+}
+#waybar > .horizontal {
+    padding-top: 1px;
+}
+
+window#waybar  {
+  background-color: @background;
+  border-radius: 8px;
+  color: @foreground;
+  transition-property: background-color;
+  transition-duration: .5s;
+}
+
+.modules-left {
+  margin-left: 8px;
+}
+
+.modules-right {
+  margin-right: 8px;
+}
+
+#custom-omarchy {
+font-size: 12px;
+margin: 0 5.5px;
+}
+
+
+#workspaces {
+  padding: 0 5px;
+  margin: 0;
+}
+
+#workspaces button {
+  all: initial;
+  padding: 0 2px;
+  margin: 0 0 0 8px;
+  opacity: 1;
+  color: @foreground;
+  font-size: 13px;
+  transition: all 0.2s ease-in;
+}
+
+#workspaces button.active {
+    color: @foreground;
+    opacity: 1.0;
+    padding: 0 2px;
+    font-size: 15px;
+}
+
+#workspaces button.empty {
+  opacity: 0.3;
+  font-size: 13px;
+}
+
+#workspaces button.empty.active {
+ font-size: 15px;
+ color: @foreground;
+ opacity: 1.0;
+}
+
+
+
+#tray,
+#sway-notification-center
+#cpu,
+#memory,
+#battery,
+#backlight,
+#network,
+#bluetooth,
+#pulseaudio,
+#power-profiles-daemon,
+#clock,
+#mpris,
+#custom-weather,
+#custom-pomodoro,
+#custom-voxtype,
+#custom-voxtype.recording,
+#custom-voxtype.transcribing,
+#idle_inhibitor,
+#custom-updatespacman,
+#custom-update,
+#custom-brightness{
+  margin: 0 5.5px;
+  padding: 0 2px;
+}
+tooltip {
+  padding: 2px;
+}
+
+
+#tray {
+    background-color: @transparent;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: @transparent;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+#power-profiles-daemon,
+#power-profiles-daemon.performance,
+#power-profiles-daemon.balanced,
+#power-profiles-daemon.power-saver {
+font-size: 12px;
+margin-right: 10px;
+}
+
+#custom-voxtype {
+  min-width: 12px;
+  margin: 0 0 0 2.5px;
+}
+
+#custom-voxtype.recording {
+  color: #a55555;
+}
+
+
+tooltip {
+ padding: 4px;
+ background: @background;
+ font-size: 10px;
+ border: 1px solid alpha(@foreground, 0.8);
+ border-radius: 8px;
+}
+tooltip label {
+    color: @foreground;
+    font-weight: normal;
+}
+
+/* Specific animation Module */
+
+#custom-screenrecording-indicator,
+#custom-idle-indicator,
+#custom-weather,
+#memory,
+#cpu,
+#custom-notification-silencing-indicator {
+  min-width: 12px;
+  margin-left: 5px;
+  margin-right: 0;
+  font-size: 0px;
+}
+
+#custom-screenrecording-indicator.active {
+  color: #eb7087;
+  animation-name: blink-recording;
+  animation-duration: 0.5s;
+}
+
+@keyframes blink-recording {
+    to {
+        color: @background;
+    }
+}
+
+
+#mpris {
+color: @foreground;
+font-size: 10px;
+padding-top: 0px;
+padding-bottom: 1px;
+opacity: 0.7;
+}
+
+@keyframes blink {
+    to {
+        color: #4a4a4a;
+        
+    }
+}
+
+#battery.warning {
+  color: #c95d0f;
+  background-color: @background;
+}
+
+@keyframes blink2 {
+  to {
+    background-color: transparent;
+    color: #f53c3c;
+  }
+}
+
+#battery.critical:not(.charging) {
+  background-color: transparent;
+  color: #e6d8ba;
+  animation-name: blink2;
+  animation-duration: 0.5s;
+  animation-timing-function: steps(12);
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#custom-weather,
+#memory,
+#cpu,
+#clock,
+#custom-pomodoro,
+#custom-brightness{
+  min-width: 12px;
+  margin-left: 5px;
+  margin-right: 0;
+  font-size: 13px;
+  padding-bottom: 1px;
+}
+
+#custom-weather {
+    background-color: #282a36; /* Dark background */
+    color: #f8f8f2;            /* Light text */
+    padding: 0 5px;
+    border-radius: 6px;
+    margin: 2 0 2 5;
+}
+#custom-idle-indicator.active,
+#custom-notification-silencing-indicator.active {
+  color: #a55555;
+  
+}
+
+#custom-pomodoro{
+  color: #aaa
+}
+
+
+menu {
+    font-family: "JetBrains Mono Nerd Font", monospace; 
+    font-weight: bold;
+    background-color: #000; 
+    color: #ffffff; 
+    border-radius: 12px; 
+    border: 1px solid #fff; 
+    font-size: 14px;
+}
+
+menuitem {
+    padding: 6px 12px; 
+    transition: background-color 0.2s ease;
+    border-radius: 12px; 
+    border: 1px solid alpha(#fff, 0.1);
+}
+
+menuitem:hover,
+menuitem:selected {
+    background-color: alpha(#6fb2bb, 0.5); 
+    border-radius: 12px; 
+    color: #ffffff; 
+}
