@@ -3,6 +3,36 @@
 -- so require("default.hypr.*") resolves here, not in /usr/share/omarchy.
 -- Re-run the script to refresh after an Omarchy update.
 
+-- Inlined from default/hypr/bootstrap.lua, minus the $OMARCHY_PATH entry:
+-- every default module is in package.preload below, so it needs no search path.
+do
+  local home = os.getenv("HOME")
+  local prefixes = { "default.hypr", "hypr", "omarchy.current.theme" }
+  local function should_reload(m)
+    for _, p in ipairs(prefixes) do
+      if m == p or m:sub(1, #p + 1) == p .. "." then return true end
+    end
+    return false
+  end
+  local stale = {}
+  for m in pairs(package.loaded) do
+    if should_reload(m) then stale[#stale + 1] = m end
+  end
+  for _, m in ipairs(stale) do package.loaded[m] = nil end
+  -- generated state (~/.local/state) and user modules (~/.config)
+  package.path = home .. "/.local/state/?.lua;" .. home .. "/.config/?.lua;" .. package.path
+
+  -- startup-cursor.lua reads OMARCHY_PATH straight from the environment and
+  -- would concatenate nil without Omarchy's session env. Fall back to the same
+  -- default paths.lua uses.
+  local real_getenv = os.getenv
+  os.getenv = function(k)
+    local v = real_getenv(k)
+    if v == nil and k == "OMARCHY_PATH" then return "/usr/share/omarchy" end
+    return v
+  end
+end
+
 package.preload["default.hypr.apps.1password"] = function(...)
 -- source: /usr/share/omarchy/default/hypr/apps/1password.lua
 -- 1Password 8.12 renamed its app id from "1Password" to the reverse-DNS form,
