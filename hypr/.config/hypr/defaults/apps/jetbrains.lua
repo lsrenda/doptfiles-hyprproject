@@ -1,0 +1,7 @@
+-- ============================================================================
+-- DEFAULTS BEGIN · windowrules · apps/jetbrains.lua
+-- Loaded from hyprland.lua before your own files, so your files override it.
+-- ============================================================================
+
+-- Disable mouse focus (see https://github.com/omacom/omarchy/pull/5183#issuecomment-4189299971).
+o.window("^(jetbrains-.*)$", { no_follow_mouse = true })
